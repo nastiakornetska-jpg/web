@@ -1,29 +1,29 @@
 /* =========================================
-   КРОК 1: Базові стилі (Шрифти, поля, фон)
+   Базові стилі (Шрифти, поля, фон)
    ========================================= */
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Гарний сучасний шрифт без засічок */
-    background-color: #f8f9fa; /* Світло-сірий, приємний для очей фон сторінки */
-    color: #333333; /* Темно-сірий колір тексту для кращої читабельності */
-    margin: 0; /* Прибираємо стандартні відступи браузера */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+    background-color: #f8f9fa; 
+    color: #333333; 
+    margin: 0; 
     padding: 0;
 }
 
 h1, h2, h3 {
-    text-align: center; /* Вирівнювання заголовків по центру */
-    color: #2c3e50; /* Темно-синій колір для заголовків */
+    text-align: center; 
+    color: #2c3e50; 
 }
 
 /* =========================================
-   КРОК 2 та 3: Стилізація навігації (Flexbox)
+   Стилізація навігації (Flexbox)
    ========================================= */
 header {
-    background-color: #2c3e50; /* Темний фон шапки */
+    background-color: #2c3e50; 
     color: white;
     padding: 20px 40px;
-    display: flex; /* Використовуємо Flexbox для шапки */
-    justify-content: space-between; /* Розносимо логотип і меню по різних краях */
-    align-items: center; /* Вирівнюємо по вертикалі по центру */
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center;
 }
 
 header h1 {
@@ -33,79 +33,73 @@ header h1 {
 }
 
 nav ul {
-    list-style-type: none; /* Прибираємо крапки у списку */
+    list-style-type: none;
     margin: 0;
     padding: 0;
-    display: flex; /* Flexbox для горизонтального меню */
-    gap: 30px; /* Відстань між пунктами меню */
+    display: flex; 
+    gap: 30px; 
 }
 
 nav a {
     color: white;
-    text-decoration: none; /* Прибираємо підкреслення посилань */
+    text-decoration: none; 
     font-weight: bold;
     padding: 8px 16px;
     border-radius: 4px;
-    transition: background-color 0.3s ease; /* Плавна зміна кольору */
+    transition: background-color 0.3s ease; 
 }
 
-/* Ефект при наведенні мишки на пункт меню (Крок 3) */
 nav a:hover {
-    background-color: #e74c3c; /* Червоний колір кнопки при наведенні */
+    background-color: #e74c3c;
 }
 
 /* =========================================
-   КРОК 2: Компонування карток подій (CSS Grid)
+   CSS Grid
    ========================================= */
 section {
-    padding: 40px; /* Відступи всередині кожної секції */
-    max-width: 1200px; /* Обмежуємо ширину контенту */
-    margin: 0 auto; /* Центруємо контент на великих екранах */
+    padding: 40px; 
+    max-width: 1200px; 
+    margin: 0 auto; 
 }
 
-/* Створюємо сітку для карток */
+
 .events-grid {
-    display: grid; /* Вмикаємо Grid */
-    /* Цей магічний рядок робить так, що картки автоматично підлаштовуються: 
-       якщо екран широкий — вони стають в ряд, якщо вузький — одна під одною */
+    display: grid; 
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
-    gap: 30px; /* Відстань між картками */
+    gap: 30px; 
     margin-top: 20px;
 }
 
-/* Стилізуємо саму картку події, щоб вона виглядала як квиток */
 .event-card {
     background-color: white;
     padding: 25px;
-    border-radius: 10px; /* Заокруглені кути */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Легка тінь для об'єму */
-    transition: transform 0.3s ease; /* Підготовка до анімації */
+    border-radius: 10px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
     gap: 15px;
 }
 
 .event-image {
-    width: 100%; /* Картинка займатиме 100% ширини всередині своєї картки */
-    height: auto; /* Висота підлаштовується автоматично... */
-    aspect-ratio: 16 / 9; /* ...але жорстко тримає пропорцію прямокутника (як екран телевізора) */
-    object-fit: cover; /* Щоб фото гарно заповнювало цей прямокутник без спотворень */
-    border-radius: 8px; /* Твої красиві заокруглені кути */
+    width: 100%; 
+    height: auto; 
+    aspect-ratio: 16 / 9; 
+    object-fit: cover; 
+    border-radius: 8px; 
 }
 
-/* Картка трохи "підстрибує" при наведенні */
 .event-card:hover {
     transform: translateY(-5px); 
 }
 
-
 /* =========================================
-   КРОК 4: Стилізація футера (Нижній колонтитул)
+   Стилізація футера 
    ========================================= */
 footer {
-    background-color: #222222; /* Дуже темний фон */
-    color: #cccccc; /* Світло-сірий текст */
-    text-align: center; /* Текст по центру */
+    background-color: #222222; 
+    color: #cccccc;
+    text-align: center; 
     padding: 30px 20px;
-    margin-top: 50px; /* Відступ зверху, щоб відірвати футер від контенту */
+    margin-top: 50px; 
 }
 
 footer h2 {
@@ -114,23 +108,20 @@ footer h2 {
 }
 
 footer p {
-    margin: 5px 0; /* Робимо рядки з контактами ближчими один до одного */
+    margin: 5px 0; 
 }
 
 
-
 /* =========================================
-   КРОК 3: Адаптивність (Медіа-запити)
+   Медіа-запити
    ========================================= */
 
 /* --- 1-й Медіа-запит: Для планшетів (екрани менші за 768px) --- */
 @media (max-width: 768px) {
-    /* Зменшуємо загальні відступи */
     section {
         padding: 30px 20px; 
     }
 
-    /* Адаптація макету: Картки подій стають вертикальними (Крок 3) */
     .event-card {
         flex-direction: column;
         text-align: center;
@@ -139,37 +130,36 @@ footer p {
 
     .event-details,
     .event-image-container {
-        width: 100%; /* Контент займає всю ширину картки */
+        width: 100%; 
     }
 
-    /* Адаптація розміру зображень (Крок 3) */
     .event-image {
-        aspect-ratio: 4 / 3; /* Зображення стають менш витягнутими */
+        aspect-ratio: 4 / 3; 
     }
 
 
     header h1 {
-        font-size: 24px; /* Було, наприклад, 36px-40px */
+        font-size: 24px; 
         line-height: 1.2;
         
     }
 
     header h2 {
-        font-size: 20px; /* Оптимально для підзаголовків секцій */
+        font-size: 20px; 
         margin-bottom: 15px;
     }
 
     .event-details h3 {
-        font-size: 20px; /* Назва самої події в картці */
+        font-size: 20px; 
     }
 
     .event-details p {
-        font-size: 15px; /* Основний текст можна зробити трохи меншим */
+        font-size: 15px; 
         line-height: 1.5;
     }
 
     .btn {
-        font-size: 14px; /* Якщо є кнопки, їх теж варто трішки "стиснути" */
+        font-size: 14px;
         padding: 10px 20px;
     }
 }
@@ -177,7 +167,6 @@ footer p {
 /* --- 2-й Медіа-запит: Для мобільних телефонів (екрани менші за 480px) --- */
 @media (max-width: 480px) {
     
-    /* Зменшуємо загальні заголовки */
     h1 {
         font-size: 22px;
     }
@@ -186,21 +175,18 @@ footer p {
         font-size: 18px;
     }
 
-    /* === НОВЕ: Спеціально для логотипу в шапці === */
     header h1 {
-        font-size: 18px; /* Робимо шрифт ще меншим, щоб довга назва влізла краще */
-        line-height: 1.4; /* Робимо відстань між рядками комфортною, якщо текст розіб'ється на два рядки */
-        margin-bottom: 10px; /* Відступ знизу до меню */
+        font-size: 18px; 
+        line-height: 1.4; 
+        margin-bottom: 10px; 
     }
 
-    /* Перебудова шапки для телефону */
     header {
         flex-direction: column;
-        padding: 15px 10px; /* Зменшили бокові відступи */
+        padding: 15px 10px; 
         gap: 10px;
     }
 
-    /* Панель навігації вертикально */
     nav ul {
         flex-direction: column; 
         width: 100%;
