@@ -143,6 +143,35 @@ section {
 }
 
 /* =========================================
+   відгуки
+   ========================================= */
+#feedback-form {
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+#feedback-form input, #feedback-form textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#comments-list li {
+    background: #f4f4f4;
+    padding: 10px;
+    margin-bottom: 5px;
+    border-radius: 4px;
+    list-style: none;
+}
+
+.archive-item {
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 10px;
+}
+/* =========================================
    Стилізація футера 
    ========================================= */
 footer {
