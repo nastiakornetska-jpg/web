@@ -1,132 +1,136 @@
 document.addEventListener('DOMContentLoaded', () => {
-    
-    const events = document.querySelectorAll('.event-card');
 
-    for (let i = 0; i < events.length; i++) {
-        
-        events[i].style.backgroundColor = '#f9f9f9';
-        events[i].style.transition = '0.3s';
+    let savedBookings = JSON.parse(localStorage.getItem('userTickets')) || [];
 
-        if (i === 0) {
-            events[i].style.border = '2px solid #ff4d4d'; 
+    const eventsContainer = document.getElementById('events-container');
+    const bookingsList = document.getElementById('booked-tickets-list');
+    const feedbackForm = document.getElementById('feedback-form'); 
+
+    /* =========================================================
+       1. ЛОГІКА ДЛЯ ГОЛОВНОЇ СТОРІНКИ 
+       ========================================================= */
+    if (eventsContainer) {
+        const eventsData = [
+            { id: 1, title: 'Концерт "Океан Ельзи"', date: '2026-05-15', place: 'Арена Львів', price: 800, img: 'images/okean_elzy.jpg' },
+            { id: 2, title: 'Гурт "Бумбокс"', date: '2026-06-28', place: 'Палац Спорту, Київ', price: 650, img: 'images/boombox.jpg' },
+            { id: 3, title: 'Phil It', date: '2026-04-27', place: 'Жовтневий палац, Київ', price: 600, img: 'images/philit.jpg' }
+        ];
+
+        const currentDate = new Date();
+        let i = 0;
+
+        while (i < eventsData.length) {
+            const eventDate = new Date(eventsData[i].date);
+            if (eventDate >= currentDate) {
+                const card = document.createElement('article');
+                card.classList.add('event-card');
+                card.innerHTML = `
+                    <img src="${eventsData[i].img}" alt="${eventsData[i].title}" class="event-image">
+                    <div class="event-details">
+                        <h3>${eventsData[i].title}</h3>
+                        <p><strong>Дата:</strong> ${eventsData[i].date}</p>
+                        <p><strong>Місце:</strong> ${eventsData[i].place}</p>
+                        <p><strong>Ціна:</strong> <span class="ticket-price">${eventsData[i].price}</span> грн</p>
+                        <div class="booking-controls">
+                            <label>Кількість: <input type="number" class="ticket-qty" value="1" min="1" max="10"></label>
+                            <button class="book-btn" data-title='${eventsData[i].title}' data-price='${eventsData[i].price}'>Забронювати</button>
+                        </div>
+                    </div>
+                `;
+                eventsContainer.appendChild(card);
+            }
+            i++;
+        }
+
+        const bookButtons = document.querySelectorAll('.book-btn');
+        bookButtons.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const card = this.closest('.event-card');
+                const qtyInput = card.querySelector('.ticket-qty');
+                const quantity = parseInt(qtyInput.value);
+                const price = parseInt(this.getAttribute('data-price'));
+                const title = this.getAttribute('data-title');
+                
+                const totalCost = quantity * price;
+
+                savedBookings.push({ title: title, quantity: quantity, total: totalCost });
+                localStorage.setItem('userTickets', JSON.stringify(savedBookings));
+
+                this.innerText = 'У кошику!';
+                this.classList.add('booked');
+                this.disabled = true;
+                qtyInput.disabled = true;
+
+                alert(`Квитки на "${title}" успішно додані!`);
+            });
+        });
+    }
+
+    /* =========================================================
+       2. ЛОГІКА ДЛЯ ФОРМИ ВІДГУКІВ 
+       ========================================================= */
+    if (feedbackForm) {
+        const commentsList = document.getElementById('comments-list');
+
+        feedbackForm.addEventListener('submit', function(event) {
+            event.preventDefault(); 
             
-            const title = events[i].querySelector('h3');
-            if (title) {
-                title.innerText += ' 🔥 (Популярне)';
-            }
-        } 
-        else if (i % 2 === 0) {
-            events[i].style.backgroundColor = '#eefaff';
-        }
-        
-        const button = events[i].querySelector('.btn');
-        if (button && i > 2) {
-            button.innerText = 'Останні квитки!';
-            button.style.backgroundColor = 'orange';
-        }
-    }
-});
+            const nameInput = document.getElementById('user-name');
+            const commentInput = document.getElementById('user-comment');
 
-document.addEventListener('DOMContentLoaded', () => {
-
-    const buttons = document.querySelectorAll('.details-btn');
-    const infoBlocks = document.querySelectorAll('.extra-info');
-
-    for (let i = 0; i < buttons.length; i++) {
-        buttons[i].addEventListener('click', function() {
-            // Крок 2: Перевірка стану через if-else
-            if (infoBlocks[i].style.display === 'none' || infoBlocks[i].style.display === '') {
-                infoBlocks[i].style.display = 'block';
-                this.innerText = 'Сховати опис';
-                this.style.backgroundColor = '#6c757d'; 
+            if (nameInput.value.trim() === '' || commentInput.value.trim() === '') {
+                alert('Будь ласка, заповніть усі поля!');
             } else {
-                infoBlocks[i].style.display = 'none';
-                this.innerText = 'Детальніше про квитки';
-                this.style.backgroundColor = '#007bff'; 
+                const newComment = document.createElement('li');
+                newComment.innerHTML = `<strong>${nameInput.value}:</strong> ${commentInput.value}`;
+                commentsList.prepend(newComment);
+
+                nameInput.value = ''; 
+                commentInput.value = '';
             }
         });
     }
 
-    // --- Крок 4: Ефект наведення з умовною логікою ---
-    const navLinks = document.querySelectorAll('nav a');
-
-    for (let i = 0; i < navLinks.length; i++) {
-        // Зберігаємо початковий текст, щоб повернути його потім
-        const originalText = navLinks[i].innerText;
-
-        navLinks[i].addEventListener('mouseenter', function() {
-            // Умовна логіка: змінюємо вміст залежно від того, що написано
-            if (originalText === 'Головна') {
-                this.innerText = '🏠 На старт';
-            } else if (originalText === 'Концерти') {
-                this.innerText = '🎸 Обрати подію';
-            } else {
-                this.innerText = '✨ Дізнатись більше';
-            }
-            this.style.fontWeight = 'bold';
-            this.style.color = '#ff4d4d';
-        });
-
-        navLinks[i].addEventListener('mouseleave', function() {
-            // Повертаємо все назад
-            this.innerText = originalText;
-            this.style.fontWeight = 'normal';
-            this.style.color = '';
-        });
-    }
-});
-
-document.addEventListener('DOMContentLoaded', () => {
-    const feedbackForm = document.getElementById('feedback-form');
-    const commentsList = document.getElementById('comments-list');
-
-    feedbackForm.addEventListener('submit', function(event) {
-        event.preventDefault();
-
-        const nameInput = document.getElementById('user-name');
-        const commentInput = document.getElementById('user-comment');
-
-        if (nameInput.value.trim() === '' || commentInput.value.trim() === '') {
-            alert('Будь ласка, заповніть усі поля!');
-            return;
+/* =========================================================
+       ЛОГІКА ДЛЯ СТОРІНКИ БРОНЮВАНЬ (bookings.html)
+       ========================================================= */
+    if (bookingsList) {
+        // Перевіряємо, чи масив порожній
+        if (savedBookings.length === 0) {
+            // Якщо квитків немає, виводимо повідомлення
+            bookingsList.innerHTML = `
+                <div style="text-align:center; padding: 50px;">
+                    <p style="font-size: 1.2rem; color: #777;">У вас поки немає заброньованих квитків.</p>
+                    <a href="index.html" style="color: #007bff; text-decoration: none; font-weight: bold;">Перейти до списку подій</a>
+                </div>
+            `;
         } else {
-            // Крок 3: Маніпуляція DOM для додавання даних
-            const newComment = document.createElement('li');
-            newComment.innerHTML = `<strong>${nameInput.value}:</strong> ${commentInput.value}`;
+            // Якщо квитки є, очищуємо контейнер (про всяк випадок) і виводимо їх
+            bookingsList.innerHTML = ''; 
             
-            commentsList.prepend(newComment);
-
-            nameInput.value = '';
-            commentInput.value = '';
-        }
-    });
-
-    const archiveData = [
-        { title: "Запитання про квитки", content: "Чи можна повернути квиток за 2 дні до події? - ТАК! Ви можете повернути квитки, але не пізніше ніж  за 24 години до події" },
-        { title: "Правила входу", content: "Вхід на стадіон відкривається за 2 години до початку." }
-    ];
-
-    const archiveSection = document.createElement('div');
-    archiveSection.innerHTML = "<h3>Архів запитань:</h3>";
-    document.getElementById('feedback-section').appendChild(archiveSection);
-
-    for (let i = 0; i < archiveData.length; i++) {
-        const item = document.createElement('div');
-        item.classList.add('archive-item');
-        item.innerHTML = `
-            <h4 style="cursor:pointer; color: blue;">${archiveData[i].title} (натисніть)</h4>
-            <p style="display:none;">${archiveData[i].content}</p>
-        `;
-
-        item.querySelector('h4').addEventListener('click', function() {
-            const content = this.nextElementSibling;
-            if (content.style.display === 'none') {
-                content.style.display = 'block';
-            } else {
-                content.style.display = 'none';
+            for (let k = 0; k < savedBookings.length; k++) {
+                const bookingItem = document.createElement('div');
+                bookingItem.classList.add('booking-item');
+                bookingItem.innerHTML = `
+                    <p>🎟️ <strong>${savedBookings[k].title}</strong> — ${savedBookings[k].quantity} шт.</p>
+                    <p>Сума до сплати: <strong>${savedBookings[k].total} грн</strong></p>
+                `;
+                bookingsList.appendChild(bookingItem);
             }
-        });
 
-        archiveSection.appendChild(item);
+            // Додаємо кнопку очищення
+            const clearBtn = document.createElement('button');
+            clearBtn.innerText = 'Очистити всі бронювання';
+            clearBtn.className = 'clear-btn'; // Додай стиль для цього класу в CSS
+            clearBtn.style.cssText = 'margin-top: 20px; padding: 10px 20px; background: #e74c3c; color: white; border: none; cursor: pointer; border-radius: 5px; width: 100%;';
+            
+            clearBtn.addEventListener('click', () => {
+                if (confirm('Ви впевнені, що хочете видалити всі бронювання?')) {
+                    localStorage.removeItem('userTickets');
+                    location.reload(); 
+                }
+            });
+            bookingsList.appendChild(clearBtn);
+        }
     }
-});
+})

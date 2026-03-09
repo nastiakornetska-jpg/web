@@ -4,9 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TicketBox - Бронювання квитків</title>
-    
     <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
 </head>
 <body>
 
@@ -15,132 +14,45 @@
         <nav>
             <ul>
                 <li><a href="#events">Події</a></li>
-                <li><a href="#my-bookings">Мої бронювання</a></li>
+                <li><a href="bookings.html">Мої бронювання</a></li>
                 <li><a href="#about">Про нас</a></li>
             </ul>
         </nav>
     </header>
 
     <main>
-        
         <section id="events">
-    <h2>Майбутні заходи</h2>
-    <div class="events-grid">
-        
-        <article class="event-card">
-            <img src="images/okean_elzy.jpg" alt="Гурт Океан Ельзи" class="event-image" width="400">
-            <div class="event-card">
-            <h3>Концерт Океан Ельзи</h3>
-            <button class="details-btn">Показати деталі</button>
-            <div class="extra-info" style="display: none;">
-        <p>Місце проведення: Арена Львів. Початок о 19:00.</p>
-    </div>
-</div>
-        </article>
-
-        <article class="event-card">
-            <img src="images/boombox.jpg" alt="Гурт Бумбокс" class="event-image" width="400">
-            <div class="event-details">
-                <h3>Концерт гурту "Бумбокс"</h3>
-                <p><strong>Дата:</strong> 28 червня 2026</p>
-                <p><strong>Місце проведення:</strong> Палац Спорту, Київ</p>
-                <p><strong>Ціна квитка:</strong> від 650 грн</p>
-            </div>
-        </article>
-
-        <article class="event-card">
-            <img src="images/philit.jpg" alt="Гурт Океан Ельзи" class="event-image" width="400">
-            <div class="event-details">
-                <h3>Концерт творчої спілки "Phil It"</h3>
-                <p><strong>Дата:</strong> 27 квітня 2026</p>
-                <p><strong>Місце проведення:</strong> Жовтневий палац, Київ</p>
-                <p><strong>Ціна квитка:</strong> від 600
-                     грн</p>
-            </div>
-        </article>
-
-        <article class="event-card">
-            <img src="images/boombox.jpg" alt="Гурт Бумбокс" class="event-image" width="400">
-            <div class="event-details">
-                <h3>Концерт гурту "Бумбокс"</h3>
-                <p><strong>Дата:</strong> 28 червня 2026</p>
-                <p><strong>Місце проведення:</strong> Палац Спорту, Київ</p>
-                <p><strong>Ціна квитка:</strong> від 650 грн</p>
-            </div>
-        </article>
-
-        <article class="event-card">
-            <img src="images/okean_elzy.jpg" alt="Гурт Океан Ельзи" class="event-image" width="400">
-            <div class="event-details">
-                <h3>Концерт гурту "Океан Ельзи"</h3>
-                <p><strong>Дата:</strong> 15 травня 2026</p>
-                <p><strong>Місце проведення:</strong> Арена Львів</p>
-                <p><strong>Ціна квитка:</strong> від 800 грн</p>
-            </div>
-        </article>
-
-        <article class="event-card">
-            <img src="images/boombox.jpg" alt="Гурт Бумбокс" class="event-image" width="400">
-            <div class="event-details">
-                <h3>Концерт гурту "Бумбокс"</h3>
-                <p><strong>Дата:</strong> 28 червня 2026</p>
-                <p><strong>Місце проведення:</strong> Палац Спорту, Київ</p>
-                <p><strong>Ціна квитка:</strong> від 650 грн</p>
-            </div>
-        </article>
-
-        <article class="event-card">
-            <img src="images/okean_elzy.jpg" alt="Гурт Океан Ельзи" class="event-image" width="400">
-            <div class="event-details">
-                <h3>Концерт гурту "Океан Ельзи"</h3>
-                <p><strong>Дата:</strong> 15 травня 2026</p>
-                <p><strong>Місце проведення:</strong> Арена Львів</p>
-                <p><strong>Ціна квитка:</strong> від 800 грн</p>
-            </div>
-        </article>
-
-        <article class="event-card">
-            <img src="images/boombox.jpg" alt="Гурт Бумбокс" class="event-image" width="400">
-            <div class="event-details">
-                <h3>Концерт гурту "Бумбокс"</h3>
-                <p><strong>Дата:</strong> 28 червня 2026</p>
-                <p><strong>Місце проведення:</strong> Палац Спорту, Київ</p>
-                <p><strong>Ціна квитка:</strong> від 650 грн</p>
-            </div>
-        </article>
-    </div>
-</section>
+            <h2>Майбутні заходи</h2>
+            <div class="events-grid" id="events-container">
+                </div>
+        </section>
 
         <section id="about">
             <h2>Про нас</h2>
-<img src="images/concert1.jpg" alt="Фото концерту" width="800" class="event-image">           
- <p>Ми — команда пристрасних організаторів, які вірять, що кожна подія має залишати незабутні враження. Наша історія почалася у 2020 році з невеликих квартирників, а сьогодні ми допомагаємо тисячам людей знаходити квитки на найгучніші заходи країни.</p>
-            
-            <p>Наша мета — зробити процес пошуку та покупки квитків максимально швидким, зручним та безпечним.</p>
-            
+            <img src="images/concert1.jpg" alt="Фото концерту" width="800" class="event-image">   
+            <p>Ми — команда пристрасних організаторів, які вірять, що кожна подія має залишати незабутні враження. Наша історія почалася у 2020 році з невеликих квартирників, а сьогодні ми допомагаємо тисячам людей знаходити квитки на найгучніші заходи країни.</p>
             <h3>Чому обирають нашу платформу:</h3>
             <ul>
                 <li>Миттєве онлайн-бронювання без черг.</li>
                 <li>Електронні квитки завжди у вашому смартфоні.</li>
                 <li>Гарантія безпечних платежів.</li>
-                <li>Ексклюзивні ранні продажі на топові концерти.</li>
             </ul>
         </section>
 
         <section id="feedback-section">
-    <h2>Залиште свій відгук</h2>
-    <form id="feedback-form">
-        <input type="text" id="user-name" placeholder="Ваше ім'я">
-        <textarea id="user-comment" placeholder="Ваш відгук"></textarea>
-        <button type="submit" id="submit-btn">Опублікувати</button>
-    </form>
-    
-    <div id="comments-container">
-        <h3>Останні відгуки:</h3>
-        <ul id="comments-list">
-            </ul>
-    </div>
-</section>
+            <h2>Залиште свій відгук</h2>
+            <form id="feedback-form">
+                <input type="text" id="user-name" placeholder="Ваше ім'я">
+                <textarea id="user-comment" placeholder="Ваш відгук"></textarea>
+                <button type="submit" id="submit-btn">Опублікувати</button>
+            </form>
+            
+            <div id="comments-container">
+                <h3>Останні відгуки:</h3>
+                <ul id="comments-list">
+                    </ul>
+            </div>
+        </section>
     </main>
 
     <footer>

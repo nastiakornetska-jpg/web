@@ -1,5 +1,5 @@
 /* =========================================
-   Базові стилі (Шрифти, поля, фон)
+   Базові стилі
    ========================================= */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
@@ -9,13 +9,16 @@ body {
     padding: 0;
 }
 
-h1, h2, h3 {
-    text-align: center; 
-    color: #2c3e50; 
+h1, h2, h3 { text-align: center; color: #2c3e50; }
+
+section {
+    padding: 40px; 
+    max-width: 1200px; 
+    margin: 0 auto; 
 }
 
 /* =========================================
-   Стилізація навігації (Flexbox)
+   Шапка та Навігація (Flexbox)
    ========================================= */
 header {
     background-color: #2c3e50; 
@@ -26,18 +29,12 @@ header {
     align-items: center;
 }
 
-header h1 {
-    color: white;
-    margin: 0;
-    font-size: 24px;
-}
+header h1 { margin: 0; font-size: 24px; color: white; }
 
 nav ul {
     list-style-type: none;
-    margin: 0;
-    padding: 0;
-    display: flex; 
-    gap: 30px; 
+    margin: 0; padding: 0;
+    display: flex; gap: 30px; 
 }
 
 nav a {
@@ -45,75 +42,12 @@ nav a {
     text-decoration: none; 
     font-weight: bold;
     padding: 8px 16px;
-    border-radius: 4px;
-    transition: background-color 0.3s ease; 
+    transition: all 0.3s ease; 
 }
 
-nav a:hover {
-    background-color: #e74c3c;
-}
 /* =========================================
-   кніпочки і то що js
+   Картки подій 
    ========================================= */
-
-   .details-btn {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 14px;
-    transition: background-color 0.3s ease, transform 0.2s;
-    margin-top: 10px;
-}
-
-nav a {
-    text-decoration: none;
-    color: #333;
-    padding: 10px 15px;
-    display: inline-block;
-    transition: all 0.2s ease; /* Для плавності, яку запустить JS */
-}
-
-/* Прихований блок спочатку не видно */
-.extra-info {
-    display: none;
-    background: #f8f9fa;
-    padding: 15px;
-    border-radius: 8px;
-    margin-top: 10px;
-    border-left: 5px solid #007bff;
-}
-
-/* Блок з додатковою інформацією */
-.extra-info {
-    margin-top: 15px;
-    padding: 10px;
-    background-color: #f1f8ff; /* Світло-блакитний фон для акценту */
-    border-left: 4px solid #007bff;
-    border-radius: 4px;
-    font-size: 14px;
-    color: #333;
-    line-height: 1.6;
-    /* Додамо невелику анімацію появи */
-    animation: fadeIn 0.4s ease;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-5px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-/* =========================================
-   CSS Grid
-   ========================================= */
-section {
-    padding: 40px; 
-    max-width: 1200px; 
-    margin: 0 auto; 
-}
-
-
 .events-grid {
     display: grid; 
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
@@ -127,8 +61,9 @@ section {
     border-radius: 10px; 
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
-    gap: 15px;
 }
+
+.event-card:hover { transform: translateY(-5px); }
 
 .event-image {
     width: 100%; 
@@ -136,61 +71,82 @@ section {
     aspect-ratio: 16 / 9; 
     object-fit: cover; 
     border-radius: 8px; 
-}
-
-.event-card:hover {
-    transform: translateY(-5px); 
-}
-
-/* =========================================
-   відгуки
-   ========================================= */
-#feedback-form {
-    display: flex;
-    flex-direction: column;
-    max-width: 400px;
-    gap: 10px;
-    margin-bottom: 30px;
-}
-
-#feedback-form input, #feedback-form textarea {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-#comments-list li {
-    background: #f4f4f4;
-    padding: 10px;
-    margin-bottom: 5px;
-    border-radius: 4px;
-    list-style: none;
-}
-
-.archive-item {
-    border-bottom: 1px solid #ddd;
-    margin-bottom: 10px;
-}
-/* =========================================
-   Стилізація футера 
-   ========================================= */
-footer {
-    background-color: #222222; 
-    color: #cccccc;
-    text-align: center; 
-    padding: 30px 20px;
-    margin-top: 50px; 
-}
-
-footer h2 {
-    color: white;
     margin-bottom: 15px;
 }
 
-footer p {
-    margin: 5px 0; 
+/* =========================================
+   Кнопки та Бронювання
+   ========================================= */
+.booking-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
 }
 
+.ticket-qty {
+    width: 60px; padding: 5px;
+    border: 1px solid #ccc; border-radius: 4px;
+}
+
+.book-btn {
+    background-color: #007bff;
+    color: white; border: none;
+    padding: 10px; border-radius: 5px;
+    font-weight: bold; cursor: pointer;
+    transition: 0.3s;
+}
+
+.book-btn:hover { background-color: #0056b3; }
+.book-btn.booked { background-color: #27ae60; cursor: not-allowed; }
+
+.booking-item {
+    background-color: white;
+    padding: 15px; margin-bottom: 10px;
+    border-radius: 8px; border-left: 5px solid #27ae60;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* =========================================
+   Відгуки та Форма
+   ========================================= */
+#feedback-form {
+    display: flex; 
+    flex-direction: column;
+    max-width: 400px; 
+    gap: 10px; 
+    margin: 0 auto 30px auto;
+}
+
+#feedback-form input, #feedback-form textarea {
+    padding: 10px; 
+    border: 1px solid #ccc; 
+    border-radius: 4px;
+}
+
+#submit-btn {
+    background-color: #e74c3c; color: white;
+    padding: 10px; border: none; border-radius: 4px;
+    cursor: pointer;
+}
+
+#comments-list li {
+    background: #eefaff; padding: 10px;
+    margin-bottom: 10px; border-radius: 4px;
+    border-left: 4px solid #007bff; list-style: none;
+}
+
+/* =========================================
+   Футер
+   ========================================= */
+footer {
+    background-color: #222222; color: #cccccc;
+    text-align: center; padding: 30px 20px;
+    margin-top: 50px; 
+}
+footer h2 { color: white; margin-bottom: 15px; }
 
 /* =========================================
    Медіа-запити
