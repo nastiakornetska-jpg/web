@@ -1,38 +1,49 @@
-// Чекаємо, поки завантажиться вся сторінка
 document.addEventListener('DOMContentLoaded', () => {
-    
-    // Крок 1 та 4: Використовуємо querySelectorAll для вибору всіх карток подій
-    const events = document.querySelectorAll('.event-card');
 
-    // Крок 2: Цикл for для перебору елементів
-    for (let i = 0; i < events.length; i++) {
-        
-        // Змінюємо колір фону кожної картки при завантаженні
-        events[i].style.backgroundColor = '#f9f9f9';
-        events[i].style.transition = '0.3s';
+    // --- Кроку 1, 2, 3: Кнопки "Детальніше" ---
+    const buttons = document.querySelectorAll('.details-btn');
+    const infoBlocks = document.querySelectorAll('.extra-info');
 
-        // Крок 3: Оператори if-else для зміни вмісту/стилю на основі індексу (i)
-        
-        // Наприклад: Виділимо першу подію як "Найпопулярнішу"
-        if (i === 0) {
-            events[i].style.border = '2px solid #ff4d4d'; // Червона рамка для першої
-            
-            // Змінюємо текст всередині (наприклад, у заголовку h3)
-            const title = events[i].querySelector('h3');
-            if (title) {
-                title.innerText += ' 🔥 (Популярне)';
+    for (let i = 0; i < buttons.length; i++) {
+        buttons[i].addEventListener('click', function() {
+            // Крок 2: Перевірка стану через if-else
+            if (infoBlocks[i].style.display === 'none' || infoBlocks[i].style.display === '') {
+                infoBlocks[i].style.display = 'block';
+                this.innerText = 'Сховати опис';
+                this.style.backgroundColor = '#6c757d'; // Змінюємо колір кнопки, коли відкрито
+            } else {
+                infoBlocks[i].style.display = 'none';
+                this.innerText = 'Детальніше про квитки';
+                this.style.backgroundColor = '#007bff'; // Повертаємо колір
             }
-        } 
-        // Наприклад: Для всіх парних карток (0, 2, 4...) додамо інший фон
-        else if (i % 2 === 0) {
-            events[i].style.backgroundColor = '#eefaff';
-        }
-        
-        // Можна також змінити текст кнопки залежно від індексу
-        const button = events[i].querySelector('.btn');
-        if (button && i > 2) {
-            button.innerText = 'Останні квитки!';
-            button.style.backgroundColor = 'orange';
-        }
+        });
+    }
+
+    // --- Крок 4: Ефект наведення з умовною логікою ---
+    const navLinks = document.querySelectorAll('nav a');
+
+    for (let i = 0; i < navLinks.length; i++) {
+        // Зберігаємо початковий текст, щоб повернути його потім
+        const originalText = navLinks[i].innerText;
+
+        navLinks[i].addEventListener('mouseenter', function() {
+            // Умовна логіка: змінюємо вміст залежно від того, що написано
+            if (originalText === 'Головна') {
+                this.innerText = '🏠 На старт';
+            } else if (originalText === 'Концерти') {
+                this.innerText = '🎸 Обрати подію';
+            } else {
+                this.innerText = '✨ Дізнатись більше';
+            }
+            this.style.fontWeight = 'bold';
+            this.style.color = '#ff4d4d';
+        });
+
+        navLinks[i].addEventListener('mouseleave', function() {
+            // Повертаємо все назад
+            this.innerText = originalText;
+            this.style.fontWeight = 'normal';
+            this.style.color = '';
+        });
     }
 });
